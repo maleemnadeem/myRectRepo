@@ -11,23 +11,53 @@ class ConditionalRenderPractice extends Component {
     super(props);
 
     this.state = {
-      data: null,
+      activeComponent: null,
     };
   }
+
+  getCurrentView(selection)
+  {
+      if(selection === '_Loading')
+      {
+          return <Loading/>
+      }
+      else if(selection === '_NotFound')
+      {
+          return<NotFound/>
+      }
+      else if (selection === '_Reload')
+      {
+          return <Reload/>
+      }
+      else if(selection === '_ServerError')
+      {
+          return <ServerError/>
+      }
+  }
+
+  changeActiveComonents(selection) {
+      this.setState(
+          {
+              activeComponent: selection
+          }
+      );
+  }
+
+
 
   render() {
     return (
         <section className="lesson-conditional-render info-panel">
           <h2>Practice Conditional Rendering</h2>
             <div>
-                <span> <button >Not Found</button> </span>
-                <span> <button>Server Error</button> </span>
-                <span> <button>Loading</button> </span>
-                <span> <button>Re-Load</button> </span>
+                <span> <button onClick={this.changeActiveComonents.bind(this,'_NotFound')} >Not Found</button> </span>
+                <span> <button onClick={this.changeActiveComonents.bind(this,'_ServerError')}>Server Error</button> </span>
+                <span> <button onClick={this.changeActiveComonents.bind(this,'_Loading')}>Loading</button> </span>
+                <span> <button onClick={this.changeActiveComonents.bind(this,'_Reload')}>Re-Load</button> </span>
             </div>
 
-            <div>
-
+            <div align="center">
+                    {this.getCurrentView(this.state.activeComponent)}
             </div>
         </section>
     );
