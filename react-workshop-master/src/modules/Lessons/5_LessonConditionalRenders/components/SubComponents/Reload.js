@@ -2,7 +2,7 @@ import React from 'react';
 
 const Reload = () =>{
   return(
-      <h>Reload.....</h>
+      <h1>Reload.....</h1>
   );
 };
 
